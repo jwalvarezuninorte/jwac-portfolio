@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="sticky z-50 w-full bg-gradient-to-tr from-secondary to-primary text-center py-2"
-  >
+  <div class="sticky z-50 w-full bg-secondary text-center py-2">
     <span class="text-sm font-normal text-base-300 text-opacity-70">
       Get a
       <span class="font-black"> FREE </span>
