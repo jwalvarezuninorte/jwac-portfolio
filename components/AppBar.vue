@@ -3,7 +3,7 @@
     <span class="text-sm font-normal text-base-300 text-opacity-70">
       Get a
       <span class="font-black"> FREE </span>
-      quote for your project
+      quote for your next project
       <button class="btn btn-sm normal-case ml-2">Contact me</button>
     </span>
   </div>
