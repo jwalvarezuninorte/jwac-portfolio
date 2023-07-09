@@ -1,5 +1,14 @@
+<script setup>
+{
+}
+</script>
 <template>
-  <appbar />
+  <Head>
+    <Title>Jhon Álvarez | Portfolio</Title>
+    <Meta name="description" :content="adlaksjd" />
+    <meta name="theme-color" content="#1db990" />
+  </Head>
+  <AppBar />
 
   <slot />
 

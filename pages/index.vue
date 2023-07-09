@@ -165,7 +165,7 @@ const projects = [
     <!-- section -->
     <div
       id="marketing"
-      class="h-screen flex flex-col justify-center py-20 px-4 md:px-20 lg:px-40 text-center text-black bg-gradient-to-tr from-secondary to-primary"
+      class="h-screen flex flex-col justify-center py-20 px-4 md:px-20 lg:px-40 text-center text-black bg-gradient-to-br from-secondary to-cyan-200"
     >
       <h2 class="text-2xl text-center">
         Lets connect and <br />
@@ -173,7 +173,9 @@ const projects = [
       </h2>
 
       <!-- mailchimp here -->
-      <div class="w-full my-10 flex flex-col md:flex-row justify-center gap-2">
+      <div
+        class="w-full my-10 flex flex-col md:flex-row justify-center items-center gap-2"
+      >
         <input
           type="text"
           placeholder="youremail@example.com"
