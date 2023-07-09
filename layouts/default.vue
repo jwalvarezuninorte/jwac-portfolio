@@ -1,6 +1,5 @@
 <script setup>
-{
-}
+const darkMode = useState("darkMode", () => true);
 </script>
 <template>
   <Head>
@@ -8,9 +7,8 @@
     <Meta name="description" :content="adlaksjd" />
     <meta name="theme-color" content="#1db990" />
   </Head>
-  <AppBar />
-
-  <slot />
-
-  <!-- todo: add footer here -->
+  <div :data-theme="darkMode ? 'forest' : 'emerald'">
+    <AppBar />
+    <slot />
+  </div>
 </template>

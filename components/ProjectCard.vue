@@ -4,16 +4,18 @@ const { project } = defineProps(["project"]);
 
 <template>
   <div
-    class="flex flex-col justify-start bg-gray-50 bg-opacity-5 p-4 rounded-3xl border-2 border-gray-50 border-opacity-10 backdrop-blur-sm magicpattern"
+    class="flex flex-col justify-start bg-gray-50 bg-opacity-5 p-4 rounded-3xl border-2 border-gray-50 border-opacity-10 backdrop-blur-sm"
   >
     <img
-      class="rounded-2xl object-cover w-full h-40 mb-4"
+      class="rounded-2xl object-cover w-full mb-4"
       :src="project.image"
       alt=""
     />
+
     <h3 class="text-lg text-left font-bold">{{ project.title }}</h3>
     <div class="flex gap-2">
       <a
+        :key="tag"
         v-for="tag in project.tags"
         class="text-secondary font-bold text-sm text-left"
       >

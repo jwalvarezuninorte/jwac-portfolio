@@ -2,27 +2,64 @@
 const projects = [
   {
     id: 1,
-    title: "Project title",
-    description: "Project description",
-    image: "https://picsum.photos/200/300",
-    tags: ["#ecommerce", "#web", "#mobile"],
+    title: "Cashout App",
+    description:
+      "Mobile application that allows users to find places to withdraw money with low fees and quickly thanks to the support of the community.",
+    image: "../public/images/cashout-app-cover.png",
+    tags: ["#map", "#finance", "#mobile"],
     link: "https://google.com",
   },
   {
-    id: 1,
-    title: "Project title",
-    description: "Project description",
-    image: "https://picsum.photos/200/300",
-    tags: ["#ecommerce", "#mobile"],
+    id: 2,
+    title: "UNtutor App",
+    description:
+      "UNtutor is an application focused on helping college students achieve student success. Through tutorials, study groups and important announcements, students will be able to focus on student success.",
+    image: "../public/images/untutor-app-cover.png",
+    tags: ["#education", "#mobile"],
     link: "https://google.com",
   },
   {
-    id: 1,
-    title: "Project title",
-    description: "Project description",
-    image: "https://picsum.photos/200/300",
-    tags: ["#AI", "#mobile"],
+    id: 3,
+    title: "Another Project App",
+    description:
+      "UNtutor is an application focused on helping college students achieve student success. Through tutorials, study groups and important announcements, students will be able to focus on student success.",
+    image: "../public/images/untutor-app-cover.png",
+    tags: ["#education", "#mobile"],
     link: "https://google.com",
+  },
+  {
+    id: 4,
+    title: "And Another App",
+    description:
+      "Mobile application that allows users to find places to withdraw money with low fees and quickly thanks to the support of the community.",
+    image: "../public/images/cashout-app-cover.png",
+    tags: ["#map", "#finance", "#mobile"],
+    link: "https://google.com",
+  },
+];
+
+const whyPeopleLoveMyWork = [
+  {
+    emoji: "🚀",
+    title: "Fast",
+    description:
+      "Fast load times and lag free interaction, my highest priority.",
+  },
+  {
+    emoji: "📱",
+    title: "Responsive",
+    description: "My layouts will work on any device, big or small.",
+  },
+  {
+    emoji: "💎",
+    title: "Intuitive",
+    description: "Strong preference for easy to use, intuitive UX/UI.",
+  },
+  {
+    emoji: "📚",
+    title: "Dynamic",
+    description:
+      "Websites don't have to be static, I love making pages come to life.",
   },
 ];
 </script>
@@ -102,21 +139,18 @@ const projects = [
       id="q"
       class="h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
     >
-      <h2 class="text-2xl text-secondary text-center">
+      <h2 class="text-4xl text-secondary text-center">
         Why people <br />
-        love my work
+        love my work ✨
       </h2>
 
       <!-- some of my habilities -->
       <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 my-10">
-        <div
-          v-for="item in 4"
-          class="text-center bg-gray-50 bg-opacity-5 px-4 py-8 rounded-3xl border-2 border-gray-50 border-opacity-10"
-        >
-          <span class="text-2xl"> ✨ </span>
-          <h3 class="text-lg font-bold mb-2">Effective</h3>
-          <p class="text-sm">Rigorously tried, tested and customer approved</p>
-        </div>
+        <SimpleInfoCard
+          :key="info.id"
+          v-for="info in whyPeopleLoveMyWork"
+          :info="info"
+        ></SimpleInfoCard>
       </div>
 
       <span class="text-md text-white text-opacity-60">
@@ -139,17 +173,18 @@ const projects = [
       id="projects-section"
       class="magicpattern h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
     >
-      <h2 class="text-2xl text-secondary text-center">
+      <h2 class="text-4xl text-secondary text-center">
         Some of my top <br />
-        projects
+        projects 🚀
       </h2>
 
       <br />
 
       <div
-        class="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 mb-6"
+        class="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 my-10"
       >
         <ProjectCard
+          :key="project.id"
           v-for="project in projects"
           :project="project"
         ></ProjectCard>
@@ -167,7 +202,7 @@ const projects = [
       id="marketing"
       class="h-screen flex flex-col justify-center py-20 px-4 md:px-20 lg:px-40 text-center text-black bg-gradient-to-br from-secondary to-cyan-200"
     >
-      <h2 class="text-2xl text-center">
+      <h2 class="text-4xl text-center">
         Lets connect and <br />
         make something great ✨
       </h2>
