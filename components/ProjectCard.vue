@@ -16,10 +16,10 @@ const { project } = defineProps(["project"]);
     <div class="flex gap-2">
       <a
         :key="tag"
-        v-for="tag in project.tags"
+        v-for="tag in project.expand.tags"
         class="text-secondary font-bold text-sm text-left"
       >
-        {{ tag }}
+        #{{ tag.name }}
       </a>
     </div>
     <p class="text-sm text-left mt-2">

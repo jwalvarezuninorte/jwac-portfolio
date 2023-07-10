@@ -1,33 +1,15 @@
 <script setup>
-const projects = [
-  {
-    id: 1,
-    title: "Cashout App",
-    description:
-      "Mobile application that allows users to find places to withdraw money with low fees and quickly thanks to the support of the community.",
-    image:
-      "https://res.cloudinary.com/dc0iduwxr/image/upload/v1688947989/jwac-portfolio/cashout-app-cover_qpb1fp.png",
-    tags: ["#map", "#finance", "#mobile"],
-    link: "https://google.com",
-  },
-  {
-    id: 2,
-    title: "UNtutor App",
-    description:
-      "UNtutor is an application focused on helping college students achieve student success. Through tutorials, study groups and important announcements, students will be able to focus on student success.",
-    image:
-      "https://res.cloudinary.com/dc0iduwxr/image/upload/v1688948108/jwac-portfolio/untutor-app-cover_atauif.png",
-    tags: ["#education", "#mobile"],
-    link: "https://google.com",
-  },
-];
+import {useState} from "#app";
+
+const {data: data} = await useFetch('https://dev-portfolio-be.pockethost.io/api/collections/projects/records?expand=tags&filter=is_top_project=true')
+const topProjects = data;
 
 const whyPeopleLoveMyWork = [
   {
     emoji: "🚀",
     title: "Fast",
     description:
-      "Fast load times and lag free interaction, my highest priority.",
+        "Fast load times and lag free interaction, my highest priority.",
   },
   {
     emoji: "📱",
@@ -43,24 +25,70 @@ const whyPeopleLoveMyWork = [
     emoji: "📚",
     title: "Dynamic",
     description:
-      "Websites don't have to be static, I love making pages come to life.",
+        "Websites don't have to be static, I love making pages come to life.",
   },
 ];
+
+const formState = useState('formState', () => ({
+  email: '',
+  message: '',
+  receive_emails: false,
+}));
+
+const emailStatus = useState('emailStatus', () => ({
+  error: null,
+  message: '',
+  loading: false,
+}))
+
+
+const sendMessage = async () => {
+  emailStatus.value.loading = true;
+  try {
+    const response = await useFetch('https://dev-portfolio-be.pockethost.io/api/collections/email_messages/records', {
+      method: 'POST',
+      body: {
+        'email': formState.value.email,
+        'message': formState.value.message,
+        'receive_emails': formState.value.receive_emails,
+      }
+    })
+    if (response.status.value === 'error') {
+      emailStatus.value = {
+        error: true,
+        message: 'There was an error trying to send message.',
+        loading: false,
+      };
+      return;
+    }
+    emailStatus.value = {
+      error: false,
+      message: 'You will receive response in less than 24 hours 🎉',
+      loading: false,
+    };
+  } catch (e) {
+    emailStatus.value = {
+      error: true,
+      message: 'There was an unexpected error trying to send message.',
+      loading: false,
+    };
+  }
+}
 </script>
 
 <template>
   <div>
     <!-- svg background -->
     <div
-      class="absolute bottom-[340px] right-32 md:right-[35%] z-0 animate-pulse"
+        class="absolute bottom-[340px] right-32 md:right-[35%] z-0 animate-pulse"
     >
       <svg
-        viewBox="0 0 2000 2000"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-32 h-32 md:w-56 md:h-56 object-cover fill-pink-400"
+          viewBox="0 0 2000 2000"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-32 h-32 md:w-56 md:h-56 object-cover fill-pink-400"
       >
-        <circle cx="1000" cy="1000" r="1000" />
+        <circle cx="1000" cy="1000" r="1000"/>
       </svg>
     </div>
 
@@ -68,19 +96,18 @@ const whyPeopleLoveMyWork = [
 
     <div class="absolute bottom-1/4 md:right-1/2 z-0 opacity-90">
       <svg
-        viewBox="0 0 2000 2000"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-56 h-5w-56 md:w-80 md:h-80 object-cover fill-secondary"
+          viewBox="0 0 2000 2000"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-56 h-5w-56 md:w-80 md:h-80 object-cover fill-secondary"
       >
-        <circle cx="1000" cy="1000" r="1000" />
+        <circle cx="1000" cy="1000" r="1000"/>
       </svg>
     </div>
 
     <!-- hero -->
-    <!-- class="hero min-h-screen bg-base-100 bg-opacity-20 backdrop-blur-3xl -translate-y-32 sm:-translate-y-32" -->
     <div
-      class="hero min-h-screen bg-base-100 bg-opacity-80 backdrop-blur-3xl -translate-y-32 sm:-translate-y-32"
+        class="hero min-h-screen bg-base-100 bg-opacity-80 backdrop-blur-3xl -translate-y-32 sm:-translate-y-32"
     >
       <div class="hero-content text-center text-neutral-content">
         <div class="max-w-md flex flex-col gap-2">
@@ -98,21 +125,21 @@ const whyPeopleLoveMyWork = [
         </div>
       </div>
       <a
-        href="#q"
-        class="btn btn-secondary btn-circle absolute bottom-0 mb-4 animate-bounce z-50"
+          href="#q"
+          class="btn btn-secondary btn-circle absolute bottom-0 mb-4 animate-bounce z-50"
       >
         <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19.5 8.25l-7.5 7.5-7.5-7.5"
           />
         </svg>
       </a>
@@ -120,20 +147,20 @@ const whyPeopleLoveMyWork = [
 
     <!-- section -->
     <div
-      id="q"
-      class="h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
+        id="q"
+        class="h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
     >
       <h2 class="text-4xl text-secondary text-center">
-        Why people <br />
+        Why people <br/>
         love my work ✨
       </h2>
 
       <!-- some of my habilities -->
       <div class="w-full grid grid-cols-2 md:grid-cols-4 gap-4 my-10">
         <SimpleInfoCard
-          :key="info.id"
-          v-for="info in whyPeopleLoveMyWork"
-          :info="info"
+            :key="info.id"
+            v-for="info in whyPeopleLoveMyWork"
+            :info="info"
         ></SimpleInfoCard>
       </div>
 
@@ -145,7 +172,7 @@ const whyPeopleLoveMyWork = [
         with +3 year of experience
       </span>
 
-      <br />
+      <br/>
 
       <button class="btn btn-secondary normal-case w-full md:max-w-lg">
         Know more about me on social media
@@ -154,110 +181,140 @@ const whyPeopleLoveMyWork = [
 
     <!-- top projects section -->
     <div
-      id="projects-section"
-      class="magicpattern h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
+        id="projects-section"
+        class="magicpattern h-screen flex flex-col justify-center items-center py-20 px-4 md:px-20 lg:px-40 text-center"
     >
       <h2 class="text-4xl text-secondary text-center">
-        Some of my top <br />
+        Some of my top <br/>
         projects 🚀
       </h2>
 
-      <br />
+      <br/>
 
       <div
-        class="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 my-10"
+          class="w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8 my-10"
       >
         <ProjectCard
-          :key="project.id"
-          v-for="project in projects"
-          :project="project"
+            :key="project.id"
+            v-for="project in topProjects.items"
+            :project="project"
         ></ProjectCard>
       </div>
 
-      <br />
+      <br/>
 
       <button class="btn btn-secondary normal-case w-full md:max-w-lg">
-        <NuxtLink to="/projects"> See more projects </NuxtLink>
+        <NuxtLink to="/projects"> See more projects</NuxtLink>
       </button>
     </div>
 
     <!-- section -->
     <div
-      id="marketing"
-      class="h-screen flex flex-col justify-center py-20 px-4 md:px-20 lg:px-40 text-center text-black bg-gradient-to-br from-secondary to-cyan-200"
+        id="marketing"
+        class="h-screen relative flex flex-col justify-center py-20 px-4 md:px-20 lg:px-40 text-center text-black bg-gradient-to-br from-secondary to-cyan-200"
     >
       <h2 class="text-4xl text-center">
-        Lets connect and <br />
+        Lets connect and <br/>
         make something great ✨
       </h2>
 
       <!-- mailchimp here -->
       <div
-        class="w-full my-10 flex flex-col md:flex-row justify-center items-center gap-2"
+          v-show="emailStatus.error == null"
+          class="w-full my-10 flex flex-col justify-center items-center gap-2"
       >
+
         <input
-          type="text"
-          placeholder="youremail@example.com"
-          class="input input-ghost w-full max-w-md text-center placeholder-neutral border-1 border-neutral border-opacity-50 text-black focus:text-black focus:bg-black focus:bg-opacity-10"
+            v-model="formState.email"
+            type="email"
+            pattern=".+@globex\.com"
+            placeholder="youremail@example.com*"
+            class="input input-ghost w-full max-w-md text-center placeholder-neutral placeholder-opacity-50 border-1 border-neutral border-opacity-50 text-black focus:text-black focus:bg-black focus:bg-opacity-10"
         />
 
-        <button class="btn w-full md:w-1/4 max-w-md normal-case">
-          Save my email
+        <textarea
+            v-model="formState.message"
+            class="w-full max-w-md rounded-3xl text-center textarea textarea-ghost placeholder-neutral placeholder-opacity-50 border-1 border-neutral border-opacity-50 text-black focus:text-black focus:bg-black focus:bg-opacity-10"
+            placeholder="Write your message here*"
+        ></textarea>
+
+        <div class="form-control w-full max-w-md">
+          <label class="label cursor-pointer">
+            <span class="label-text text-neutral font-bold">Receive promotional emails</span>
+            <input v-model="formState.receive_emails" type="checkbox" class="toggle" checked/>
+          </label>
+        </div>
+
+        <button
+            v-show="emailStatus.error == null"
+            :disabled="emailStatus.loading"
+            @click="sendMessage"
+            class="btn w-full md:w-1/4 max-w-md normal-case">
+          {{ emailStatus.loading ? 'Sending message' : 'Send message' }}
+          <span v-show="emailStatus.loading" class="loading loading-spinner loading-xs"/>
         </button>
       </div>
 
-      <span class="text-md text-opacity-60">
-        Full Stack
-        <span class="badge badge-lg badge-black font-semibold">
-          Developer
-        </span>
-        with +3 year of experience
-      </span>
+      <div class="w-full my-10 flex flex-col justify-center items-center">
+        <div v-show="emailStatus.error != null"
+             :class="(emailStatus.error ? 'bg-red-600 ' : 'bg-black bg-opacity-20 ') +'alert sm:flex sm:justify-between w-full max-w-md mb-8 border-none text-base-300'">
+          <div>
+            <h3 class="font-bold">
+              {{ emailStatus.error ? 'Error :c' : 'Yeiii 🌈' }}
+            </h3>
+            <div class="text-xs">{{ emailStatus.message }}</div>
+          </div>
+          <button
+              @click="emailStatus.error = null"
+              class="btn btn-sm normal-case"
+          >
+            {{ emailStatus.error ? 'Try again' : 'Send another' }}
+          </button>
+        </div>
+      </div>
 
-      <br />
-
-      <div class="flex justify-center gap-6 translate-y-40">
+      <div class="absolute left-0 bottom-0 w-full flex justify-center gap-6 -translate-y-20">
         <button class="btn btn-circle bg-black bg-opacity-10 border-none">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-twitter fill-neutral"
-            viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-twitter fill-neutral"
+              viewBox="0 0 16 16"
           >
             <path
-              d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
+                d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"
             />
           </svg>
         </button>
 
         <button class="btn btn-circle bg-black bg-opacity-10 border-none">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-github fill-neutral"
-            viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-github fill-neutral"
+              viewBox="0 0 16 16"
           >
             <path
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
             />
           </svg>
         </button>
 
         <button class="btn btn-circle bg-black bg-opacity-10 border-none">
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-instagram fill-neutral"
-            viewBox="0 0 16 16"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-instagram fill-neutral"
+              viewBox="0 0 16 16"
           >
             <path
-              d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
             />
           </svg>
         </button>
