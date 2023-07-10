@@ -16,8 +16,8 @@ const darkMode = useState("darkMode", () => true);
     <div>
       <a class="btn btn-ghost normal-case text-xl">
         <NuxtLink to="/">
-          <img class="w-36 hidden md:block" src="logo.svg" alt="My awesome logo"/>
-          <img class="w-20 block md:hidden" src="logo-mini.svg" alt="My awesome mini logo"/>
+          <img class="w-36 hidden md:block" src="/public/logo.svg" alt="My awesome logo"/>
+          <img class="w-20 block md:hidden" src="/public/logo-mini.svg" alt="My awesome mini logo"/>
         </NuxtLink>
       </a>
     </div>
