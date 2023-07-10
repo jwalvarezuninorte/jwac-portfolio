@@ -5,7 +5,7 @@ const projects = [
     title: "Cashout App",
     description:
       "Mobile application that allows users to find places to withdraw money with low fees and quickly thanks to the support of the community.",
-    image: "/public/img/cashout-app-cover.png",
+    image: "assets/img/cashout-app-cover.png",
     tags: ["#map", "#finance", "#mobile"],
     link: "https://google.com",
   },
@@ -14,7 +14,7 @@ const projects = [
     title: "UNtutor App",
     description:
       "UNtutor is an application focused on helping college students achieve student success. Through tutorials, study groups and important announcements, students will be able to focus on student success.",
-    image: "/public/img/untutor-app-cover.png",
+    image: "assets/img/untutor-app-cover.png",
     tags: ["#education", "#mobile"],
     link: "https://google.com",
   },
@@ -23,7 +23,7 @@ const projects = [
     title: "Another Project App",
     description:
       "UNtutor is an application focused on helping college students achieve student success. Through tutorials, study groups and important announcements, students will be able to focus on student success.",
-    image: "/public/img/untutor-app-cover.png",
+    image: "assets/img/untutor-app-cover.png",
     tags: ["#education", "#mobile"],
     link: "https://google.com",
   },
@@ -32,7 +32,7 @@ const projects = [
     title: "And Another App",
     description:
       "Mobile application that allows users to find places to withdraw money with low fees and quickly thanks to the support of the community.",
-    image: "/public/img/cashout-app-cover.png",
+    image: "assets/img/cashout-app-cover.png",
     tags: ["#map", "#finance", "#mobile"],
     link: "https://google.com",
   },
