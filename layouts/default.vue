@@ -4,7 +4,7 @@ const darkMode = useState("darkMode", () => true);
 <template>
   <Head>
     <Title>Jhon Álvarez | Portfolio</Title>
-    <Meta name="description" :content="adlaksjd" />
+    <Meta name="description" content="Personal portfolio" />
     <meta name="theme-color" content="#1db990" />
   </Head>
   <div :data-theme="darkMode ? 'forest' : 'emerald'">
